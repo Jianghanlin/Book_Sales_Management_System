@@ -5,8 +5,8 @@ import java.sql.*;
 public class JDBCUtils {
 	public static Connection getConnection() throws SQLException, ClassNotFoundException {
 		Connection con = null;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		String url = "jdbc:mysql://localhost:3306/dog?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+		Class.forName("com.mysql.cj.jdbc.Driver");// 由于使用的是Java8版本，所以语句不一样
+		String url = "jdbc:mysql://localhost:3306/dog?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";// 由于使用的是Java8版本，所以语句不一样
 		String username = "root";
 		String password = "jianghanlin123";
 		con = DriverManager.getConnection(url, username, password);

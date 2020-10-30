@@ -1,25 +1,23 @@
 /*
  * Author：Jarvis
- * Date：2020.10.21
+ * Date：2020.11.1
  * Class：17电子信息工程1 
  * Num：Xb17610107
 */
-
 /*
  * Description：购物车类
  * 
 */
-
 package Book_Sales_Manage_System;
 
 public class Customer {
-	private String num;
-	private String name;
-	private String author;
-	private String date;
-	private float price;
-	private float money;
-	private int amount;
+	private String num;// 书号
+	private String name;// 书名
+	private String author;// 作者
+	private String date;// 出版日期
+	private float price;// 价格
+	private float money;// 每种书的结算
+	private int amount;// 每种书的购买数量
 
 	public String getNum() {
 		return num;
@@ -77,6 +75,7 @@ public class Customer {
 		this.amount = amount;
 	}
 
+	// 购物车的有参构造函数
 	public Customer(String num, String name, String author, String date, float price, float money, int amount) {
 		super();
 		this.num = num;
@@ -88,6 +87,7 @@ public class Customer {
 		this.amount = amount;
 	}
 
+	// 购物车的无参构造函数
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub

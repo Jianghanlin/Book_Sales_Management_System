@@ -1,33 +1,31 @@
+/*
+ * Author：Jarvis
+ * Date：2020.11.1
+ * Class：17电子信息工程1 
+ * Num：Xb17610107
+*/
+
+/*
+ * Description：实体类Book
+ * 
+*/
 package Book_Sales_Manage_System;
 
 public class Book {
-	private int order;
-	private String num;
-	private String name;
-	private String author;
-	private String date;
-	private float price;
-	private int amount;
+	private String num;// 书号
+	private String name;// 书名
+	private String author;// 作者
+	private String date;// 出版日期
+	private float price;// 价格
+	private int amount;// 库存数量
 
-	public boolean equals(Object anObject) {// 由于使用contains方法会调用equals，所以重写equals方法
-		Book book = (Book) anObject;
-		return num.equals(book.getNum());
-	}
-
+	// Book()的构造函数
 	public Book() {
 	}
 
-	public int getOrder() {
-		return order;
-	}
-
-	public void setOrder(int order) {
-		this.order = order;
-	}
-
-	public Book(int order, String num, String name, String author, String date, float price, int amount) {
+	// Book()的有参构造函数
+	public Book(String num, String name, String author, String date, float price, int amount) {
 		super();
-		this.order = order;
 		this.num = num;
 		this.name = name;
 		this.author = author;
