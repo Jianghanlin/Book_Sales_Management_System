@@ -36,6 +36,26 @@ public class BookManager {
 	}
 
 	public void search() {// 图书查询函数
+		books.clear();
+		try {
+			con = JDBCUtils.getConnection();
+			stat = con.createStatement();
+			rs = stat.executeQuery("select * from book");// 从本地数据库中获取图书信息保存进Arraylist类的books中
+			while (rs.next()) {
+				Book book = new Book();
+				book.setNum(rs.getString(1));
+				book.setName(rs.getString(2));
+				book.setAuthor(rs.getString(3));
+				book.setDate(rs.getString(4));
+				book.setPrice(rs.getFloat(5));
+				book.setAmount(rs.getInt(6));
+				books.add(book);
+			}
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			JDBCUtils.release(rs, stat, con);
+		}
 		int i = 0;
 		int flag = 0;// flag为检索到相同图书的标志变量，如果始终=0，说明没有相同的图书；如果=1，说明存在相同的图书
 		String num;
@@ -448,7 +468,7 @@ public class BookManager {
 		Username = input.next();
 		System.out.print(">>Administrator Password:");
 		Password = input.next();
-		while ((Username.equals("admin") != true) && (Password.equals("admin") != true)) {// 用户名和密码=admin才能进入
+		while ((Username.equals("admin") != true) || (Password.equals("admin") != true) || (Username.equals(Password) != true)) {// 用户名和密码=admin才能进入
 			System.out.println("用户名密码输入错误，请重新输入！！！");
 			System.out.print(">>Administrator Username:");
 			Username = input.next();
@@ -560,13 +580,21 @@ public class BookManager {
 
 	public int login_initial() {// 登陆初始化
 		int choose = 0;
+		int cycle = 1;
 		System.out.print(">>请选择模式（1.库存管理员    2.顾客    3.退出系统）:");// 一级选择界面，3种功能
-		@SuppressWarnings("resource")
-		Scanner input = new Scanner(System.in);
-		choose = input.nextInt();
-		while ((choose != 1) && (choose != 2) && (choose != 3)) {
-			System.out.println("输入错误！！，请重新输入！！:");
-			choose = input.nextInt();
+		while (cycle == 1) {
+			@SuppressWarnings("resource")
+			Scanner input = new Scanner(System.in);
+			try {
+				choose = input.nextInt();
+				if ((choose == 1) || (choose == 2) || (choose == 3)) {
+					cycle = 0;
+				} else {
+					System.out.print("输入错误！！，请重新输入！！:");
+				}
+			} catch (Exception ex) {
+				System.out.print("输入非法，请重新输入！！:");
+			}
 		}
 		return choose;
 	}
